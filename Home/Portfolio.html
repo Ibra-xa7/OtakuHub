@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ValorantIQ Portfolio</title>
+
+  <!-- Font Awesome for social icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    :root {
+      --bg-dark: #1c1b24;
+      --text-dark: #faf3e0;
+      --primary-dark: #ff6d6d;
+      --secondary-dark: #ffd6a5;
+
+      --bg-light: #ffffff;
+      --text-light: #333333;
+      --primary-light: #ffb347;
+      --secondary-light: #ffeecc;
+    }
+
+    * {
+      transition: background-color 0.3s ease, color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    body.light-theme {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    header {
+      width: 100%;
+      max-width: 960px;
+      background-color: var(--bg-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+    }
+
+    body.light-theme header {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    #logo {
+      height: 50px;
+      cursor: pointer;
+    }
+
+    #homeBtn {
+      background-color: var(--primary-dark);
+      border: none;
+      border-radius: 6px;
+      color: var(--text-dark);
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      margin-left: 1rem;
+    }
+    #homeBtn:hover {
+      background-color: #ff5454;
+    }
+    #homeBtn a{
+      text-decoration: none;
+      color: var(--text-dark);
+    }
+    body.light-theme #homeBtn {
+      background-color: var(--primary-light);
+      color: var(--text-light);
+    }
+    body.light-theme #homeBtn:hover {
+      background-color: #ffa500;
+    }
+
+    nav a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    nav a:hover {
+      color: var(--primary-dark);
+    }
+
+    body.light-theme nav a:hover {
+      color: var(--primary-light);
+    }
+
+    main {
+      width: 100%;
+      max-width: 960px;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2, h3, h4 {
+      margin: 0 0 0.75rem 0;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      color: var(--primary-dark);
+      text-align: center;
+    }
+
+    body.light-theme h2 {
+      color: var(--primary-light);
+    }
+
+    p {
+      color: inherit;
+      font-size: 1.1rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    #about {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      background-color: var(--bg-dark);
+      padding: 2rem;
+      border-radius: 12px;
+    }
+
+    body.light-theme #about {
+      background-color: var(--bg-light);
+    }
+
+    #about img {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      transition: opacity 0.3s ease;
+    }
+
+    #about div {
+      max-width: 600px;
+    }
+
+    #projects .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      #projects .projects-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      #projects .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #about {
+        flex-direction: column;
+      }
+    }
+
+    .project-card {
+      background-color: var(--bg-dark);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 109, 109, 0.5);
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+    }
+
+    body.light-theme .project-card {
+      background-color: var(--bg-light);
+      box-shadow: 0 0 10px rgba(255, 179, 71, 0.5);
+    }
+
+    .project-card:hover {
+      box-shadow: 0 0 20px var(--primary-dark);
+    }
+
+    body.light-theme .project-card:hover {
+      box-shadow: 0 0 20px var(--primary-light);
+    }
+
+    .project-card img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+    }
+
+    #contact {
+      text-align: center;
+    }
+
+    #contact a {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--primary-dark), var(--secondary-dark));
+      color: var(--text-dark);
+      padding: 0.75rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    #contact a:hover {
+      background: linear-gradient(90deg, #ff5454, #ffbc7d);
+    }
+
+    body.light-theme #contact a {
+      background: linear-gradient(90deg, var(--primary-light), var(--secondary-light));
+      color: var(--text-light);
+    }
+
+    body.light-theme #contact a:hover {
+      background: linear-gradient(90deg, #ffa500, #ffddb3);
+    }
+
+    footer {
+      width: 100%;
+      max-width: 960px;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      padding: 1.5rem 0;
+      text-align: center;
+      border-radius: 8px;
+      margin-top: auto;
+    }
+
+    body.light-theme footer {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    .footer-social a {
+      color: inherit;
+      margin: 0 0.5rem;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      color: var(--primary-dark);
+    }
+
+    body.light-theme .footer-social a:hover {
+      color: var(--primary-light);
+    }
+
+    .apps-menu {
+      position: relative;
+      display: inline-block;
+      margin-top: 1rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--primary-dark);
+      user-select: none;
+    }
+
+    body.light-theme .apps-menu {
+      color: var(--primary-light);
+    }
+
+    .apps-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: var(--bg-dark);
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      min-width: 180px;
+      z-index: 100;
+    }
+
+    body.light-theme .apps-dropdown {
+      background-color: var(--bg-light);
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .apps-dropdown a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    body.light-theme .apps-dropdown a {
+      color: var(--text-light);
+      border-color: rgba(0,0,0,0.1);
+    }
+
+    .apps-dropdown a:hover {
+      background-color: var(--primary-dark);
+      color: var(--text-dark);
+    }
+
+    body.light-theme .apps-dropdown a:hover {
+      background-color: var(--primary-light);
+      color: var(--text-light);
+    }
+
+    .apps-menu:focus .apps-dropdown,
+    .apps-menu:hover .apps-dropdown {
+      display: block;
+    }
+
+    /* Language & Theme Switcher Controls */
+    .controls {
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding: 0 2rem;
+    }
+
+    button, select {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      background-color: var(--primary-dark);
+      color: var(--text-dark);
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover, select:hover {
+      background-color: #ff5454;
+    }
+
+    body.light-theme button,
+    body.light-theme select {
+      background-color: var(--primary-light);
+      color: var(--text-light);
+    }
+
+    body.light-theme button:hover,
+    body.light-theme select:hover {
+      background-color: #ffa500;
+    }
+    .project-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--bg-dark);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 109, 109, 0.5);
+  text-align: center;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  color: inherit;
+  text-decoration: none;
+}
+
+body.light-theme .project-card {
+  background-color: var(--bg-light);
+  box-shadow: 0 0 10px rgba(255, 179, 71, 0.5);
+}
+
+.project-card:hover,
+.project-card:focus-visible {
+  box-shadow: 0 0 20px var(--primary-dark);
+  background-color: rgba(255, 109, 109, 0.1);
+  outline: none;
+}
+
+body.light-theme .project-card:hover,
+body.light-theme .project-card:focus-visible {
+  box-shadow: 0 0 20px var(--primary-light);
+  background-color: rgba(255, 179, 71, 0.1);
+}
+#projects .projects-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  #projects .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  #projects .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div style="display:flex; align-items:center;">
+      <img id="logo" src="PR-white.png" alt="ValorantIQ Logo" />
+      <button id="homeBtn" aria-label="Return Home"><a href="/Home/Home.html">Home</a></button>
+    </div>
+    <nav><a href="#contact" data-i18n="contact">Contact</a></nav>
+  </header>
+
+  <div class="controls">
+    <button id="toggleTheme" aria-label="Toggle Light/Dark Theme">🌙</button>
+    <select id="langSwitcher" aria-label="Select Language">
+      <option value="en">English</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+
+  <main>
+    <section>
+      <h2 data-i18n="welcome">Welcome, Friend</h2>
+      <p data-i18n="subtitle">I’m a Developer and Designer — Let’s build something epic.</p>
+    </section>
+
+    <section id="about">
+      <img id="aboutImg" src="charactre.png" alt="Your Photo" />
+      <div>
+        <h3 data-i18n="aboutMe">About Me</h3>
+        <p data-i18n="aboutText">I’m passionate about coding, especially building stylish web apps with a touch of everything. I enjoy play football and coding my favourite character is Sung-jin-woo!</p>
+      </div>
+    </section>
+
+<section id="projects">
+  <h3 data-i18n="projects">Projects</h3>
+  <div class="projects-grid">
+    <a href="https://valorant-iq.vercel.app/" target="_blank" class="project-card" tabindex="0" aria-label="Valorant Web project">
+      <i class="fas fa-gamepad fa-5x" style="color: var(--primary-dark); margin-bottom:1rem;"></i>
+      <h4 data-i18n="valorantWeb">Valorant Web</h4>
+      <p>A Valorant-themed gaming website featuring real-time stats and player insights.</p>
+    </a>
+
+    <a href="https://international-coffe.vercel.app/" target="_blank" class="project-card" tabindex="0" aria-label="International Coffee project">
+      <i class="fas fa-coffee fa-5x" style="color: var(--primary-dark); margin-bottom:1rem;"></i>
+      <h4 data-i18n="coffeeApp">International Coffee</h4>
+      <p>A modern coffee shop website with a warm, inviting design and interactive features.</p>
+    </a>
+
+    <a href="/index.html" target="_blank" class="project-card" tabindex="0" aria-label="Movie App project">
+      <i class="fas fa-film fa-5x" style="color: var(--primary-dark); margin-bottom:1rem;"></i>
+      <h4 data-i18n="movieApp">Movie app</h4>
+      <p>Is this web. An anime movie streaming platform with smooth animations and user-friendly interface.</p>
+    </a>
+
+    <a href="https://my-portfolio-jin.vercel.app/" target="_blank" class="project-card" tabindex="0" aria-label="Portfolio project">
+      <i class="fas fa-folder-open fa-5x" style="color: var(--primary-dark); margin-bottom:1rem;"></i>
+      <h4 data-i18n="portfolioApp">Portfolio</h4>
+      <p>My personal portfolio showcasing my projects, skills, and creative work.</p>
+    </a>
+  </div>
+</section>
+
+
+
+
+    <section id="contact">
+      <h3 data-i18n="contactTitle">Contact</h3>
+      <p data-i18n="contactText">Let’s connect! Feel free to reach out.</p>
+      <a href="mailto:Brahimbrika0@gmail.com" data-i18n="contactBtn">Contact Me</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-social" aria-label="Social Media Links">
+      <a href="https://www.instagram.com/ibr_xa7?igsh=aXUybjk2a2I4b3M4" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://youtube.com/@ibr_xa7?si=fH-OO4PMripc6vBL" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://tiktok.com/@ibr_xa7" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.facebook.com/share/1ANhPPESJy" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+    </div>
+
+    <p>© 2025 Brahim Brika. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Translations
+    const translations = {
+      en: {
+        welcome: "Welcome, Friend",
+        subtitle: "I’m a Developer and Designer — Let’s build something epic.",
+        aboutMe: "About Me",
+        aboutText: "I’m passionate about coding, especially building stylish web apps with a touch of everything. I enjoy play football and coding my favourite character is Sung-jin-woo!",
+        projects: "Projects",
+        valorantWeb: "Valorant Web",
+        valorantWebDesc: "Send me message and Let’s go with",
+        movieApp: "Movie app",
+        movieAppDesc: "Is an Anime website with animations.",
+        contact: "Contact",
+        contactTitle: "Contact",
+        contactText: "Let’s connect! Feel free to reach out.",
+        contactBtn: "Contact Me",
+        portfolioApp: "Portfolio",
+        coffeeApp: "Coffee Web",
+        gameApp: "Game Web Valorant"
+      },
+      ar: {
+        welcome: "مرحبًا صديقي",
+        subtitle: "أنا مطور ومصمم — دعنا نبني شيئًا ملحميًا.",
+        aboutMe: "عني",
+        aboutText: "أنا شغوف بالبرمجة، خاصة بناء تطبيقات الويب الأنيقة مع لمسة من كل شيء. أحب لعب كرة القدم والبرمجة، وشخصيتي المفضلة هي Sung-jin-woo!",
+        projects: "المشاريع",
+        valorantWeb: "موقع Valorant",
+        valorantWebDesc: "أرسل لي رسالة ولنبدأ معًا",
+        movieApp: "تطبيق الأفلام",
+        movieAppDesc: "هو موقع أنمي مع رسوم متحركة.",
+        contact: "اتصل",
+        contactTitle: "اتصل بي",
+        contactText: "دعنا نتواصل! لا تتردد في الوصول إليّ.",
+        contactBtn: "اتصل بي",
+        portfolioApp: "محفظة",
+        coffeeApp: "موقع القهوة",
+        gameApp: "موقع Valorant للألعاب"
+      }
+    };
+
+    const elements = document.querySelectorAll("[data-i18n]");
+    const langSwitcher = document.getElementById("langSwitcher");
+    const body = document.body;
+    const logo = document.getElementById("logo");
+    const toggleThemeBtn = document.getElementById("toggleTheme");
+    const aboutImg = document.getElementById("aboutImg");
+    const homeBtn = document.getElementById("homeBtn");
+
+    function translate(lang) {
+      elements.forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+
+      if (lang === "ar") {
+        document.documentElement.lang = "ar";
+        document.documentElement.dir = "rtl";
+        body.setAttribute("dir", "rtl");
+      } else {
+        document.documentElement.lang = "en";
+        document.documentElement.dir = "ltr";
+        body.setAttribute("dir", "ltr");
+      }
+    }
+
+    function updateLogo(theme) {
+      if (theme === "light") {
+        logo.src = "/PR-text.png";
+        logo.alt = "ValorantIQ Logo Light";
+      } else {
+        logo.src = "/PR-white.png";
+        logo.alt = "ValorantIQ Logo Dark";
+      }
+    }
+
+    function updateAboutImage(theme) {
+      if (theme === "light") {
+        aboutImg.src = "/charactre.png";
+        aboutImg.alt = "Your Photo Light";
+      } else {
+        aboutImg.src = "/charactre-white.png";
+        aboutImg.alt = "Your Photo Dark";
+      }
+    }
+
+    function toggleTheme() {
+      if (body.classList.contains("light-theme")) {
+        body.classList.remove("light-theme");
+        toggleThemeBtn.textContent = "🌙";
+        updateLogo("dark");
+        updateAboutImage("dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        body.classList.add("light-theme");
+        toggleThemeBtn.textContent = "☀️";
+        updateLogo("light");
+        updateAboutImage("light");
+        localStorage.setItem("theme", "light");
+      }
+    }
+
+    // Initialize theme & language from localStorage
+    window.addEventListener("DOMContentLoaded", () => {
+      const savedLang = localStorage.getItem("language") || "en";
+      langSwitcher.value = savedLang;
+      translate(savedLang);
+
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      if (savedTheme === "light") {
+        body.classList.add("light-theme");
+        toggleThemeBtn.textContent = "☀️";
+        updateLogo("light");
+        updateAboutImage("light");
+      } else {
+        body.classList.remove("light-theme");
+        toggleThemeBtn.textContent = "🌙";
+        updateLogo("dark");
+        updateAboutImage("dark");
+      }
+    });
+
+    toggleThemeBtn.addEventListener("click", toggleTheme);
+
+    langSwitcher.addEventListener("change", (e) => {
+      const lang = e.target.value;
+      translate(lang);
+      localStorage.setItem("language", lang);
+    });
+
+    homeBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OtakuHub Home</title>
+    <link rel="stylesheet" href="home.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img id="siteLogo" src="/PR-text.png" alt="OtakuHub" />
+      </div>
+
+      <nav class="nav-links">
+        <a href="/Home/Home.html" data-i18n="home">Home</a>
+        <a href="/Home/Portfolio.html" data-i18n="portfolio">Portfolio</a>
+        <a href="#about" data-i18n="about">About</a>
+        <a href="#blog" data-i18n="blog">Blog</a>
+        <a href="/Home/Watch.html" data-i18n="Watch">Watch</a>
+        <a href="#contactSection" data-i18n="contact">Contact</a>
+      </nav>
+
+      <div class="header-controls">
+        <button id="toggleTheme" aria-label="Toggle Theme">🌙</button>
+        <select id="langSwitcher" aria-label="Select Language">
+          <option value="en">EN</option>
+          <option value="ar">AR</option>
+        </select>
+
+        <div class="notification" tabindex="0" aria-label="Notifications">
+          <i class="fas fa-bell"></i>
+          <div class="dropdown notifications-dropdown" role="list"></div>
+        </div>
+
+        <div class="apps-menu" tabindex="0" aria-label="Apps Menu">
+          <i class="fas fa-ellipsis-h"></i>
+          <div class="dropdown apps-dropdown" role="menu">
+            <a href="https://my-portfolio-jin.vercel.app/" target="_blank" data-i18n="portfolioApp">Portfolio</a>
+            <a href="https://international-coffe.vercel.app/" target="_blank" data-i18n="coffeeApp">Coffee Web</a>
+            <a href="https://valorant-iq.vercel.app/" target="_blank" data-i18n="gameApp">Game Web Valorant</a>
+          </div>
+        </div>
+
+        <div class="profile" tabindex="0" aria-haspopup="true" aria-label="Profile Menu">
+          <img id="profilePic" src="assets/default-avatar.png" alt="Avatar" />
+          <div class="dropdown profile-dropdown" role="menu">
+            <label for="uploadPic"><i class="fas fa-upload"></i> <span data-i18n="uploadPic">Upload Picture</span></label>
+            <input type="file" id="uploadPic" hidden />
+
+            <p><i class="fas fa-envelope"></i> <span id="userEmail">loading...</span></p>
+            <p><i class="fas fa-lock"></i> <span id="userPassword">*******</span> <button id="togglePassBtn">👁️</button></p>
+
+            <a href="#"><i class="fas fa-user-edit"></i> <span data-i18n="changeAccount">Change Account</span></a>
+            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> <span data-i18n="logout">Logout</span></a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="welcome-section">
+        <img src="/Home/bg.jpg" alt="Welcome" class="welcome-photo" />
+        <h1 data-i18n="welcomeText">Welcome to OtakuHub!</h1>
+      </section>
+
+      <section id="about" class="about">
+        <h2 data-i18n="aboutTitle">About</h2>
+        <div class="about-content">
+          <!-- Added id here for theme switching -->
+          <img src="/charactre.png" alt="Character" class="about-character" id="aboutCharacter" />
+          <p data-i18n="aboutText">
+            I've created several modern and stylish websites such as:
+            <ul>
+              <li>💼 <strong>My Portfolio</strong> – A showcase of my personal work and projects.</li>
+              <li>☕ <strong>Coffee Website</strong> – A bilingual coffee shop site with beautiful design.</li>
+              <li>🎮 <strong>Valorant Game Web</strong> – A themed game-inspired interactive page.</li>
+            </ul>
+            I'm passionate about web development and improving my creative skills every day.
+          </p>
+        </div>
+      </section>
+
+      <section id="blog" class="blog">
+        <h2 data-i18n="blogTitle">Latest Blog</h2>
+        <p data-i18n="blogText">Discover my thoughts on coding, designing UI/UX, and creating interactive projects. New tutorials and tips every week!</p>
+      </section>
+
+      <section id="contactSection" class="contact">
+        <h2 data-i18n="contactTitle">Contact Me</h2>
+        <form id="contactForm" novalidate>
+          <label for="name" data-i18n="contactNameLabel">Name</label>
+          <input type="text" id="name" name="name" required placeholder="Your Name" />
+
+          <label for="email" data-i18n="contactEmailLabel">Email</label>
+          <input type="email" id="email" name="email" required placeholder="you@example.com" />
+
+          <label for="message" data-i18n="contactMessageLabel">Message</label>
+          <textarea id="message" name="message" required placeholder="Your message here..."></textarea>
+
+          <button type="submit" class="btn btn-primary" data-i18n="contactSendBtn">Send</button>
+        </form>
+      </section>
+    </main>
+
+    <button id="scrollTopBtn" title="Go to top" aria-label="Scroll to top" style="display:none;">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer class="footer">
+      <p>© 2025 OtakuHub. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="home.js"></script>
+    <script src="email.js"></script>
+    <script src="lang.js"></script>
+  </body>
+</html>

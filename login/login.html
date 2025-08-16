@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - OtakuHub</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/login/login.css" />
+  </head>
+  <body>
+    <div class="container login-container">
+      <!-- Theme + Language Switcher -->
+      <div class="controls">
+        <button id="toggleTheme" class="icon-btn" aria-label="Toggle Theme">
+          🌙
+        </button>
+        <select id="langSwitcher" aria-label="Select Language">
+          <option value="en">EN</option>
+          <option value="ar">AR</option>
+        </select>
+      </div>
+
+      <!-- Logo -->
+      <div class="logo-container">
+        <img src="/PR-text.png" alt="OtakuHub Logo" class="logo" id="logoImg" />
+      </div>
+
+      <!-- Title -->
+      <h1 data-i18n="loginTitle">Login to OtakuHub</h1>
+
+      <!-- Login Form -->
+      <form id="loginForm" novalidate>
+        <label for="email" data-i18n="emailLabel">Email</label>
+        <div class="input-group">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="you@example.com"
+            autocomplete="email"
+          />
+          <i class="fa fa-envelope icon"></i>
+        </div>
+
+        <label for="password" data-i18n="passwordLabel">Password</label>
+        <div class="input-group">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            placeholder="••••••••"
+            autocomplete="current-password"
+          />
+          <i class="fa fa-lock icon"></i>
+        </div>
+
+        <!-- Remember Me + Forgot Password -->
+        <div class="form-extra">
+          <label class="checkbox-label">
+            <input type="checkbox" id="rememberMe" />
+            <span data-i18n="rememberMe">Remember Me</span>
+          </label>
+          <a href="#" id="forgotPassword" data-i18n="forgotPassword"
+            >Forgot Password?</a
+          >
+        </div>
+
+        <!-- Login Button -->
+        <button
+          type="submit"
+          class="btn btn-primary cta"
+          aria-label="Login"
+          data-i18n="login"
+        >
+          <i class="fa fa-key"></i> Login
+        </button>
+      </form>
+
+      <!-- Signup Link -->
+      <p class="signup-text">
+        <span data-i18n="noAccount">Don't have an account?</span>
+        <a href="../signup/signup.html" data-i18n="signupHere">Sign up here</a>
+      </p>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+
+    <!-- Scripts -->
+    <script type="module" src="/login/firebase-config.js"></script>
+    <script src="/login/lang.js"></script>
+    <script type="module" src="/login/script.js"></script>
+  </body>
+</html>

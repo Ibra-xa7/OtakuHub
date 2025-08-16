@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instagram Reel - Themed & Functional</title>
+  <!-- FontAwesome CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-p3F0a1oz7ZwQ1cfwhbNz0KGkqPQ8nYOqx4ZcaIxULZ+p5+EogDPrwWVHnjp+KcmGihZ4w7uFGPe06NpyPkYfBA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    /* ========== COLORS & THEMES ========== */
+    :root {
+      /* Your colors */
+      --bg-dark: #1c1b24;
+      --text-dark: #FAF3E0;
+      --primary-dark: #FF6D6D;
+      --secondary-dark: #FFD6A5;
+
+      --bg-light: #FFFFFF;
+      --text-light: #333333;
+      --primary-light: #FF6D6D;
+      --secondary-light: #FFD6A5;
+
+      /* Font Sizes */
+      --fs-sm: 0.85rem;
+      --fs-md: 1rem;
+      --fs-lg: 1.2rem;
+      --fs-xl: 1.5rem;
+
+      /* Transition */
+      --trans: 0.3s ease-in-out;
+    }
+
+    /* Dark theme variables override */
+    body.dark-theme {
+      --bg: var(--bg-dark);
+      --text: var(--text-dark);
+      --primary: var(--primary-dark);
+      --secondary: var(--secondary-dark);
+      --input-bg: #2a2a36;
+      --input-border: #444;
+      --sidebar-bg: #2a2a36;
+      --sidebar-border: #444;
+      --topbar-bg: #2a2a36;
+      --btn-bg: var(--primary-dark);
+      --btn-text: var(--text-dark);
+      --overlay-gradient: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 80%);
+      --shadow-color: rgba(0,0,0,0.7);
+    }
+
+    /* Light theme variables */
+    body {
+      --bg: var(--bg-light);
+      --text: var(--text-light);
+      --primary: var(--primary-light);
+      --secondary: var(--secondary-light);
+      --input-bg: #fff;
+      --input-border: #ccc;
+      --sidebar-bg: #fff;
+      --sidebar-border: #ddd;
+      --topbar-bg: #fafafa;
+      --btn-bg: var(--primary-light);
+      --btn-text: var(--text-light);
+      --overlay-gradient: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 80%);
+      --shadow-color: rgba(0,0,0,0.1);
+    }
+
+    /* ========== RESET & BASE ========== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      transition: color var(--trans), background-color var(--trans);
+    }
+    body {
+      background-color: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: var(--fs-md);
+      line-height: 1.4;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: var(--text);
+      transition: color var(--trans);
+    }
+    button:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    /* ========== HEADER ========== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background-color: var(--topbar-bg);
+      border-bottom: 1px solid var(--sidebar-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      z-index: 200;
+    }
+
+    .logo {
+      font-family: 'Segoe Script', cursive;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .search-container {
+      position: relative;
+      flex-grow: 1;
+      max-width: 400px;
+      margin: 0 1rem;
+    }
+    .search-container input[type="search"] {
+      width: 100%;
+      padding: 6px 36px 6px 12px;
+      border: 1px solid var(--input-border);
+      border-radius: 20px;
+      background-color: var(--input-bg);
+      color: var(--text);
+      font-size: var(--fs-md);
+      transition: border-color var(--trans);
+    }
+    .search-container input[type="search"]:focus {
+      border-color: var(--primary);
+      outline: none;
+      background-color: var(--input-bg);
+    }
+    .search-container .fa-search {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--secondary);
+      pointer-events: none;
+      font-size: 1rem;
+    }
+
+    .top-right-icons {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--text);
+    }
+    .top-right-icons button {
+      font-size: 1.2rem;
+      position: relative;
+      color: var(--text);
+      background: transparent;
+    }
+    .top-right-icons button:hover {
+      color: var(--primary);
+    }
+    .top-right-icons .badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: var(--primary);
+      color: var(--text);
+      font-size: 0.65rem;
+      padding: 2px 5px;
+      border-radius: 50%;
+      display: inline-block;
+      min-width: 18px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .profile-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .profile-wrapper img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      transition: border-color var(--trans);
+    }
+    .profile-wrapper:hover img,
+    .profile-wrapper:focus-within img {
+      border-color: var(--secondary);
+    }
+    .profile-dropdown {
+      position: absolute;
+      right: 0;
+      top: 48px;
+      background: var(--sidebar-bg);
+      border: 1px solid var(--sidebar-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px var(--shadow-color);
+      width: 180px;
+      display: none;
+      flex-direction: column;
+      z-index: 250;
+    }
+    .profile-dropdown.active {
+      display: flex;
+    }
+    .profile-dropdown button {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: background-color var(--trans);
+      border-left: 4px solid transparent;
+    }
+    .profile-dropdown button.active,
+    .profile-dropdown button:hover {
+      background-color: var(--primary);
+      color: var(--text-light);
+      border-left-color: var(--secondary);
+    }
+
+    /* ========== MAIN ========== */
+    main {
+      margin-top: 56px;
+      display: flex;
+      flex-grow: 1;
+      height: calc(100vh - 56px);
+      background-color: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    /* Sidebar on right desktop, bottom mobile */
+    nav.sidebar {
+      background-color: var(--sidebar-bg);
+      border-left: 1px solid var(--sidebar-border);
+      width: 240px;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 0;
+      position: fixed;
+      right: 0;
+      top: 56px;
+      bottom: 0;
+      overflow-y: auto;
+      z-index: 150;
+      transition: background-color var(--trans);
+    }
+    nav.sidebar ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding-left: 0;
+      margin: 0;
+      flex-grow: 1;
+    }
+    nav.sidebar li {
+      padding: 0.7rem 1.2rem;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: var(--fs-md);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      border-radius: 8px;
+      transition: background-color var(--trans), color var(--trans);
+    }
+    nav.sidebar li:hover,
+    nav.sidebar li:focus {
+      background-color: var(--primary);
+      color: var(--text-light);
+      outline: none;
+    }
+    nav.sidebar li i {
+      font-size: 1.2rem;
+      min-width: 20px;
+      text-align: center;
+    }
+    .social-placeholder {
+      text-align: center;
+      padding: 0.5rem 1rem;
+      font-size: var(--fs-sm);
+      color: var(--secondary);
+    }
+
+    /* Reels container fills available space */
+    section.reels-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 1rem 1.5rem;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    .reel-wrapper {
+      width: 360px;
+      max-width: 100vw;
+      aspect-ratio: 9 / 16;
+      background-color: black;
+      border-radius: 12px;
+      box-shadow: 0 0 10px var(--shadow-color);
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .reel-wrapper video.reel-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    /* Overlay content */
+    .reel-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--overlay-gradient);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 20;
+    }
+    .reel-user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .reel-user-info img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+    }
+    .reel-user-info .username {
+      font-weight: 700;
+      font-size: var(--fs-md);
+      user-select: none;
+    }
+    .follow-btn {
+      margin-left: auto;
+      background-color: var(--primary);
+      color: var(--text-light);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      transition: background-color var(--trans);
+      user-select: none;
+    }
+    .follow-btn:hover {
+      background-color: var(--secondary);
+      color: var(--text-dark);
+    }
+    .follow-btn.following {
+      background-color: var(--secondary);
+      color: var(--text-dark);
+    }
+    .caption {
+      font-size: 0.9rem;
+      line-height: 1.3;
+      user-select: text;
+    }
+
+    /* Volume button top right on reel */
+    .volume-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      font-size: 1.1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 25;
+      transition: background-color var(--trans);
+    }
+    .volume-btn:hover {
+      background: var(--primary);
+      color: var(--text-light);
+    }
+
+    /* Side buttons column */
+    .side-buttons {
+      position: absolute;
+      right: 12px;
+      bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 25;
+      user-select: none;
+    }
+    .side-buttons button {
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: white;
+      cursor: pointer;
+      transition: color var(--trans);
+    }
+    .side-buttons button:hover {
+      color: var(--primary);
+    }
+    .side-buttons span {
+      display: block;
+      text-align: center;
+      font-size: 0.75rem;
+      color: white;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Comments modal overlay */
+    .comments-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 300;
+    }
+    .comments-modal.active {
+      display: flex;
+    }
+    .comments-content {
+      background: var(--sidebar-bg);
+      color: var(--text);
+      width: 90vw;
+      max-width: 480px;
+      max-height: 80vh;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+    .comments-header {
+      padding: 1rem;
+      border-bottom: 1px solid var(--sidebar-border);
+      font-weight: 700;
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .comments-list {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .comment-item {
+      margin-bottom: 1rem;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .comment-item img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      flex-shrink: 0;
+    }
+    .comment-text {
+      background: var(--bg);
+      padding: 8px 12px;
+      border-radius: 12px;
+      color: var(--text);
+      max-width: 100%;
+      word-wrap: break-word;
+      flex-grow: 1;
+    }
+    .comments-input-area {
+      padding: 0.5rem 1rem;
+      border-top: 1px solid var(--sidebar-border);
+      background: var(--input-bg);
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .comments-input-area input[type="text"] {
+      flex-grow: 1;
+      padding: 8px 12px;
+      font-size: var(--fs-md);
+      border-radius: 20px;
+      border: 1px solid var(--input-border);
+      background: var(--bg);
+      color: var(--text);
+      outline-offset: 2px;
+      transition: border-color var(--trans);
+    }
+    .comments-input-area input[type="text"]:focus {
+      border-color: var(--primary);
+    }
+    .comments-input-area button {
+      background-color: var(--primary);
+      color: var(--text-light);
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: none;
+      user-select: none;
+      transition: background-color var(--trans);
+    }
+    .comments-input-area button:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+    .comments-input-area button:hover:enabled {
+      background-color: var(--secondary);
+      color: var(--text-dark);
+    }
+
+    /* Video grid for profile tabs */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(140px,1fr));
+      gap: 1rem;
+      padding: 1rem;
+      overflow-y: auto;
+      max-height: calc(80vh - 100px);
+    }
+    .video-thumb {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 0 5px var(--shadow-color);
+      background-color: #000;
+    }
+    .video-thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      filter: brightness(0.9);
+      transition: filter 0.3s;
+    }
+    .video-thumb:hover video {
+      filter: brightness(1);
+    }
+    .video-thumb .overlay {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 4px 8px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      font-weight: 600;
+      font-size: var(--fs-sm);
+      user-select: none;
+      text-align: center;
+    }
+
+    /* Responsive sidebar bottom on small screens */
+    @media (max-width: 768px) {
+      nav.sidebar {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        top: auto;
+        height: 56px;
+        width: 100%;
+        flex-direction: row;
+        border-left: none;
+        border-top: 1px solid var(--sidebar-border);
+        padding: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+      nav.sidebar ul {
+        flex-direction: row;
+        gap: 0.5rem;
+        padding: 0 0.5rem;
+        width: 100%;
+        justify-content: center;
+      }
+      nav.sidebar li {
+        font-size: 1.3rem;
+        padding: 0.5rem 1rem;
+        justify-content: center;
+        gap: 4px;
+        flex-grow: 0;
+      }
+      nav.sidebar li span {
+        display: none;
+      }
+      main {
+        margin-right: 0;
+        margin-bottom: 56px;
+      }
+      section.reels-container {
+        padding: 0.5rem;
+      }
+      .reel-wrapper {
+        width: 90vw;
+        max-width: none;
+        aspect-ratio: 9 / 16;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo" tabindex="0">Instagram</div>
+
+  <div class="search-container">
+    <input
+      type="search"
+      id="searchInput"
+      placeholder="Search"
+      aria-label="Search users"
+      autocomplete="off"
+    />
+    <i class="fa fa-search"></i>
+    <div id="searchResults" role="listbox" aria-live="polite" style="position:absolute;top:110%;left:0;right:0;background:var(--bg);border:1px solid var(--input-border);border-radius:8px;max-height:200px;overflow-y:auto;display:none;z-index:400;"></div>
+  </div>
+
+  <div class="top-right-icons" role="navigation" aria-label="User actions">
+    <button id="toggleThemeBtn" aria-label="Toggle light/dark theme" title="Toggle light/dark theme">
+      <i class="fa fa-sun"></i>
+    </button>
+
+    <select id="langSwitcher" aria-label="Language switcher" title="Select language" style="border-radius:8px; padding:4px 8px; border:1px solid var(--input-border); background: var(--input-bg); color: var(--text); font-weight: 600;">
+      <option value="en" selected>EN</option>
+      <option value="fr">FR</option>
+    </select>
+
+    <button id="notificationsBtn" aria-label="Notifications" title="Notifications">
+      <i class="fa fa-bell"></i>
+      <span class="badge" id="notifCount" style="display:none;">0</span>
+    </button>
+
+    <div class="profile-wrapper" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="User profile menu">
+      <img src="https://via.placeholder.com/40" alt="User profile picture" id="profilePic" />
+      <div class="profile-dropdown" role="menu" aria-label="Profile options">
+        <button role="menuitem" data-tab="home" class="active">Home</button>
+        <button role="menuitem" data-tab="saved">Saved</button>
+        <button role="menuitem" data-tab="likes">Likes</button>
+        <button role="menuitem" data-tab="followers">Followers</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="reels-container" aria-live="polite" aria-label="Reels feed">
+    <!-- Reels inserted here by JS -->
+  </section>
+
+  <nav class="sidebar" role="navigation" aria-label="Main menu">
+    <ul>
+      <li tabindex="0" data-link="home"><i class="fa fa-home"></i><span>Home</span></li>
+      <li tabindex="0" data-link="search"><i class="fa fa-search"></i><span>Search</span></li>
+      <li tabindex="0" data-link="notifications"><i class="fa fa-bell"></i><span>Notifications</span></li>
+      <li tabindex="0" data-link="contact"><i class="fa fa-envelope"></i><span>Contact</span></li>
+      <li tabindex="0" data-link="social"><i class="fa fa-hashtag"></i><span>Our Social</span></li>
+      <li tabindex="0" data-link="profile"><i class="fa fa-user"></i><span>Profile</span></li>
+    </ul>
+    <div class="social-placeholder" aria-hidden="true">Social buttons coming soon...</div>
+  </nav>
+</main>
+
+<!-- Comments Modal -->
+<div class="comments-modal" role="dialog" aria-modal="true" aria-labelledby="commentsTitle" tabindex="-1" aria-hidden="true">
+  <div class="comments-content">
+    <header class="comments-header">
+      <h2 id="commentsTitle">Comments</h2>
+      <button id="closeCommentsBtn" aria-label="Close comments modal"><i class="fa fa-xmark"></i></button>
+    </header>
+    <section class="comments-list" tabindex="0" aria-live="polite">
+      <!-- Comments inserted here -->
+    </section>
+    <form class="comments-input-area" aria-label="Add comment">
+      <input type="text" id="commentInput" placeholder="Add a comment..." aria-required="true" />
+      <button type="submit" id="commentSubmitBtn" disabled>Post</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  (() => {
+    // ==== THEME ====
+    const body = document.body;
+    const toggleThemeBtn = document.getElementById('toggleThemeBtn');
+    const themeIcon = toggleThemeBtn.querySelector('i');
+
+    // Load theme from localStorage or default light
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-theme');
+      themeIcon.classList.replace('fa-sun', 'fa-moon');
+    }
+
+    toggleThemeBtn.addEventListener('click', () => {
+      const isDark = body.classList.toggle('dark-theme');
+      if (isDark) {
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // ==== LANGUAGE SWITCHER ====
+    const langSwitcher = document.getElementById('langSwitcher');
+    // Just saving selection for now, no content changes
+    const savedLang = localStorage.getItem('lang') || 'en';
+    langSwitcher.value = savedLang;
+    langSwitcher.addEventListener('change', () => {
+      localStorage.setItem('lang', langSwitcher.value);
+      alert('Language changed to: ' + langSwitcher.value.toUpperCase() + '. (Functionality coming soon)');
+    });
+
+    // ==== DATA MOCK ====
+    // Simplified users and reels data - replace or expand as needed
+    const users = [
+      {
+        id: 1,
+        username: 'samsonolsen',
+        profilePic: 'https://i.pravatar.cc/150?img=12',
+        followers: [2],
+        saved: [],
+        likes: [],
+      },
+      {
+        id: 2,
+        username: 'jessy',
+        profilePic: 'https://i.pravatar.cc/150?img=47',
+        followers: [],
+        saved: [],
+        likes: [],
+      },
+      {
+        id: 3,
+        username: 'alex',
+        profilePic: 'https://i.pravatar.cc/150?img=50',
+        followers: [],
+        saved: [],
+        likes: [],
+      },
+    ];
+
+    const reels = [
+      {
+        id: 101,
+        userId: 1,
+        videoSrc: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm',
+        caption: 'Enjoying the flowers 🌸',
+        likesCount: 1500,
+        comments: [
+          { userId: 2, text: 'Beautiful!' },
+          { userId: 3, text: 'Nice colors!' },
+        ],
+      },
+      {
+        id: 102,
+        userId: 2,
+        videoSrc: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/tank.webm',
+        caption: 'Cool tank demo 🚀',
+        likesCount: 900,
+        comments: [
+          { userId: 1, text: 'Impressive!' },
+        ],
+      },
+      {
+        id: 103,
+        userId: 3,
+        videoSrc: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/bee.webm',
+        caption: 'Bee buzzing 🐝',
+        likesCount: 1200,
+        comments: [],
+      },
+    ];
+
+    // Current logged in user (mock)
+    const currentUser = users[0];
+
+    // ==== UTILITIES ====
+    function formatNumber(num) {
+      if (num >= 1e6) return (num / 1e6).toFixed(1) + 'M';
+      if (num >= 1e3) return (num / 1e3).toFixed(1) + 'K';
+      return num;
+    }
+
+    // ==== ELEMENTS ====
+    const reelsContainer = document.querySelector('.reels-container');
+    const profileWrapper = document.querySelector('.profile-wrapper');
+    const profileDropdown = profileWrapper.querySelector('.profile-dropdown');
+    const profilePic = document.getElementById('profilePic');
+    profilePic.src = currentUser.profilePic;
+
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    const commentsModal = document.querySelector('.comments-modal');
+    const commentsList = commentsModal.querySelector('.comments-list');
+    const commentInput = commentsModal.querySelector('#commentInput');
+    const commentSubmitBtn = commentsModal.querySelector('#commentSubmitBtn');
+    const closeCommentsBtn = commentsModal.querySelector('#closeCommentsBtn');
+
+    let activeReelId = null;
+
+    // ==== RENDER REELS ====
+    function renderReelsFeed() {
+      reelsContainer.innerHTML = '';
+      reels.forEach(r => {
+        const reelEl = createReelElement(r);
+        reelsContainer.appendChild(reelEl);
+      });
+    }
+
+    function createReelElement(reel) {
+      const user = users.find(u => u.id === reel.userId);
+      const reelWrapper = document.createElement('article');
+      reelWrapper.className = 'reel-wrapper';
+      reelWrapper.setAttribute('tabindex', '0');
+      reelWrapper.setAttribute('aria-label', `Reel by ${user.username}: ${reel.caption}`);
+
+      // Video element
+      const video = document.createElement('video');
+      video.className = 'reel-video';
+      video.src = reel.videoSrc;
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.autoplay = true;
+      video.setAttribute('aria-label', `Video reel by ${user.username}`);
+
+      reelWrapper.appendChild(video);
+
+      // Volume button
+      const volumeBtn = document.createElement('button');
+      volumeBtn.className = 'volume-btn';
+      volumeBtn.setAttribute('aria-label', 'Toggle mute/unmute');
+      volumeBtn.innerHTML = '<i class="fa fa-volume-xmark"></i>';
+      reelWrapper.appendChild(volumeBtn);
+
+      volumeBtn.addEventListener('click', () => {
+        video.muted = !video.muted;
+        updateVolumeIcon();
+      });
+      function updateVolumeIcon() {
+        volumeBtn.innerHTML = video.muted
+          ? '<i class="fa fa-volume-xmark"></i>'
+          : '<i class="fa fa-volume-high"></i>';
+      }
+      updateVolumeIcon();
+
+      // Volume adjustment by scroll on video
+      video.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        if (e.deltaY < 0) {
+          video.volume = Math.min(1, video.volume + 0.1);
+        } else {
+          video.volume = Math.max(0, video.volume - 0.1);
+        }
+        if (video.volume === 0) video.muted = true;
+        else video.muted = false;
+        updateVolumeIcon();
+      });
+
+      // Side buttons container
+      const sideButtons = document.createElement('div');
+      sideButtons.className = 'side-buttons';
+
+      // Like button
+      const likeBtn = document.createElement('button');
+      likeBtn.setAttribute('aria-label', 'Like');
+      likeBtn.innerHTML = `<i class="fa fa-heart"></i>`;
+      const likeCount = document.createElement('span');
+      likeCount.textContent = formatNumber(reel.likesCount);
+      sideButtons.appendChild(likeBtn);
+      sideButtons.appendChild(likeCount);
+
+      // Comment button
+      const commentBtn = document.createElement('button');
+      commentBtn.setAttribute('aria-label', 'Comment');
+      commentBtn.innerHTML = `<i class="fa fa-comment"></i>`;
+      const commentCount = document.createElement('span');
+      commentCount.textContent = reel.comments.length;
+      sideButtons.appendChild(commentBtn);
+      sideButtons.appendChild(commentCount);
+
+      // Share button
+      const shareBtn = document.createElement('button');
+      shareBtn.setAttribute('aria-label', 'Share');
+      shareBtn.innerHTML = `<i class="fa fa-share"></i>`;
+      const shareSpan = document.createElement('span');
+      shareSpan.textContent = 'Share';
+      sideButtons.appendChild(shareBtn);
+      sideButtons.appendChild(shareSpan);
+
+      // Save button
+      const saveBtn = document.createElement('button');
+      saveBtn.setAttribute('aria-label', 'Save');
+      saveBtn.innerHTML = `<i class="fa fa-bookmark"></i>`;
+      const saveSpan = document.createElement('span');
+      saveSpan.textContent = 'Save';
+      sideButtons.appendChild(saveBtn);
+      sideButtons.appendChild(saveSpan);
+
+      reelWrapper.appendChild(sideButtons);
+
+      // Overlay info container
+      const overlay = document.createElement('div');
+      overlay.className = 'reel-overlay';
+
+      const userInfo = document.createElement('div');
+      userInfo.className = 'reel-user-info';
+
+      const profileImg = document.createElement('img');
+      profileImg.src = user.profilePic;
+      profileImg.alt = user.username + ' profile picture';
+
+      const username = document.createElement('span');
+      username.className = 'username';
+      username.textContent = '@' + user.username;
+
+      // Follow button
+      const followBtn = document.createElement('button');
+      followBtn.className = 'follow-btn';
+      followBtn.textContent = currentUser.followers.includes(user.id) ? 'Following' : 'Follow';
+
+      userInfo.appendChild(profileImg);
+      userInfo.appendChild(username);
+      userInfo.appendChild(followBtn);
+
+      overlay.appendChild(userInfo);
+
+      // Caption
+      const caption = document.createElement('div');
+      caption.className = 'caption';
+      caption.textContent = reel.caption;
+      overlay.appendChild(caption);
+
+      reelWrapper.appendChild(overlay);
+
+      // ==== EVENT LISTENERS ====
+
+      // Like toggle
+      likeBtn.addEventListener('click', () => {
+        if (currentUser.likes.includes(reel.id)) {
+          // Unlike
+          currentUser.likes = currentUser.likes.filter(i => i !== reel.id);
+          reel.likesCount--;
+        } else {
+          currentUser.likes.push(reel.id);
+          reel.likesCount++;
+        }
+        likeCount.textContent = formatNumber(reel.likesCount);
+        updateLikeBtn();
+        saveState();
+      });
+      function updateLikeBtn() {
+        if (currentUser.likes.includes(reel.id)) {
+          likeBtn.classList.add('liked');
+          likeBtn.style.color = 'var(--primary)';
+        } else {
+          likeBtn.classList.remove('liked');
+          likeBtn.style.color = 'white';
+        }
+      }
+      updateLikeBtn();
+
+      // Follow toggle
+      followBtn.addEventListener('click', () => {
+        if (currentUser.id === user.id) return; // Can't follow yourself
+        if (currentUser.followers.includes(user.id)) {
+          // Unfollow
+          currentUser.followers = currentUser.followers.filter(f => f !== user.id);
+          followBtn.textContent = 'Follow';
+        } else {
+          currentUser.followers.push(user.id);
+          followBtn.textContent = 'Following';
+        }
+        saveState();
+      });
+
+      // Comment modal open
+      commentBtn.addEventListener('click', () => {
+        openCommentsModal(reel.id);
+      });
+
+      // Share & Save placeholders (no real functionality)
+      shareBtn.addEventListener('click', () => {
+        alert('Share feature coming soon!');
+      });
+      saveBtn.addEventListener('click', () => {
+        alert('Save feature coming soon!');
+      });
+
+      return reelWrapper;
+    }
+
+    // ==== COMMENTS MODAL ====
+    function openCommentsModal(reelId) {
+      activeReelId = reelId;
+      commentsModal.setAttribute('aria-hidden', 'false');
+      commentsModal.classList.add('active');
+      commentInput.value = '';
+      commentSubmitBtn.disabled = true;
+      renderCommentsList();
+      commentInput.focus();
+    }
+    function closeCommentsModal() {
+      activeReelId = null;
+      commentsModal.classList.remove('active');
+      commentsModal.setAttribute('aria-hidden', 'true');
+    }
+    closeCommentsBtn.addEventListener('click', closeCommentsModal);
+    commentsModal.addEventListener('click', e => {
+      if (e.target === commentsModal) closeCommentsModal();
+    });
+    // ESC key closes modal
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && activeReelId !== null) {
+        closeCommentsModal();
+      }
+    });
+
+    commentInput.addEventListener('input', () => {
+      commentSubmitBtn.disabled = commentInput.value.trim() === '';
+    });
+    commentSubmitBtn.addEventListener('click', e => {
+      e.preventDefault();
+      if (!activeReelId) return;
+      const text = commentInput.value.trim();
+      if (!text) return;
+      const reel = reels.find(r => r.id === activeReelId);
+      reel.comments.push({ userId: currentUser.id, text });
+      commentInput.value = '';
+      commentSubmitBtn.disabled = true;
+      renderCommentsList();
+      updateCommentsCount(activeReelId);
+      saveState();
+    });
+
+    function renderCommentsList() {
+      if (!activeReelId) return;
+      const reel = reels.find(r => r.id === activeReelId);
+      commentsList.innerHTML = '';
+      if (reel.comments.length === 0) {
+        commentsList.innerHTML = '<p>No comments yet.</p>';
+        return;
+      }
+      reel.comments.forEach(c => {
+        const user = users.find(u => u.id === c.userId);
+        const commentEl = document.createElement('div');
+        commentEl.className = 'comment-item';
+
+        const avatar = document.createElement('img');
+        avatar.src = user.profilePic;
+        avatar.alt = user.username + ' profile picture';
+
+        const textDiv = document.createElement('div');
+        textDiv.className = 'comment-text';
+        textDiv.textContent = c.text;
+
+        commentEl.appendChild(avatar);
+        commentEl.appendChild(textDiv);
+        commentsList.appendChild(commentEl);
+      });
+    }
+    function updateCommentsCount(reelId) {
+      const reel = reels.find(r => r.id === reelId);
+      // Find reel element to update count
+      const reelEl = [...reelsContainer.children].find(el => {
+        return el.querySelector('.reel-video').src === reel.videoSrc;
+      });
+      if (!reelEl) return;
+      const commentCountSpan = reelEl.querySelector('.side-buttons button[aria-label="Comment"] + span');
+      if (commentCountSpan) commentCountSpan.textContent = reel.comments.length;
+    }
+
+    // ==== PROFILE DROPDOWN ====
+    profileWrapper.addEventListener('click', () => {
+      const expanded = profileWrapper.getAttribute('aria-expanded') === 'true';
+      profileWrapper.setAttribute('aria-expanded', String(!expanded));
+      profileDropdown.classList.toggle('active');
+    });
+    document.addEventListener('click', e => {
+      if (!profileWrapper.contains(e.target)) {
+        profileDropdown.classList.remove('active');
+        profileWrapper.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // ==== SEARCH FUNCTIONALITY ====
+    searchInput.addEventListener('input', () => {
+      const val = searchInput.value.trim().toLowerCase();
+      if (val.length < 2) {
+        searchResults.style.display = 'none';
+        searchResults.innerHTML = '';
+        return;
+      }
+      const matched = users.filter(u => u.username.toLowerCase().includes(val));
+      if (matched.length === 0) {
+        searchResults.innerHTML = '<div style="padding: 8px;">No users found</div>';
+        searchResults.style.display = 'block';
+        return;
+      }
+      searchResults.innerHTML = matched.map(u => `
+        <div tabindex="0" role="option" data-username="${u.username}" style="padding: 8px; cursor: pointer; display:flex; align-items:center; gap:8px;">
+          <img src="${u.profilePic}" alt="${u.username} profile picture" style="width:32px; height:32px; border-radius:50%; border:2px solid var(--primary);" />
+          <span>@${u.username}</span>
+        </div>
+      `).join('');
+      searchResults.style.display = 'block';
+
+      // Add click & keyboard navigation
+      Array.from(searchResults.children).forEach(child => {
+        child.addEventListener('click', () => {
+          openUserProfile(child.getAttribute('data-username'));
+          searchResults.style.display = 'none';
+          searchInput.value = '';
+        });
+        child.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openUserProfile(child.getAttribute('data-username'));
+            searchResults.style.display = 'none';
+            searchInput.value = '';
+          }
+        });
+      });
+    });
+
+    document.addEventListener('click', e => {
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.style.display = 'none';
+      }
+    });
+
+    // ==== OPEN USER PROFILE ====
+    // For demo: show alert with username
+    function openUserProfile(username) {
+      alert(`Open profile page for @${username} (functionality coming soon)`);
+    }
+
+    // ==== SIDEBAR NAVIGATION ====
+    const sidebarLinks = document.querySelectorAll('nav.sidebar li');
+    sidebarLinks.forEach(li => {
+      li.addEventListener('click', () => {
+        handleSidebarNavigation(li.dataset.link);
+      });
+      li.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleSidebarNavigation(li.dataset.link);
+        }
+      });
+    });
+
+    function handleSidebarNavigation(link) {
+      switch(link) {
+        case 'home':
+          // Scroll to top or reload reels
+          reelsContainer.scrollTop = 0;
+          break;
+        case 'search':
+          searchInput.focus();
+          break;
+        case 'notifications':
+          alert('No new notifications yet!');
+          break;
+        case 'contact':
+          alert('Contact page coming soon!');
+          break;
+        case 'social':
+          alert('Our Social buttons coming soon!');
+          break;
+        case 'profile':
+          alert('Profile page coming soon!');
+          break;
+      }
+    }
+
+    // ==== PERSISTENCE ====
+    // Save likes, followers, etc. in localStorage so visible across devices (demo)
+
+    function saveState() {
+      localStorage.setItem('likes', JSON.stringify(currentUser.likes));
+      localStorage.setItem('followers', JSON.stringify(currentUser.followers));
+    }
+    function loadState() {
+      const likes = JSON.parse(localStorage.getItem('likes'));
+      if (likes) currentUser.likes = likes;
+      else currentUser.likes = [];
+      const followers = JSON.parse(localStorage.getItem('followers'));
+      if (followers) currentUser.followers = followers;
+      else currentUser.followers = [];
+    }
+    loadState();
+
+    // Initial render
+    renderReelsFeed();
+
+  })();
+</script>
+
+</body>
+</html>

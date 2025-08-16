@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up - OtakuHub</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-pOZ3u8s4uV1qTqOa+YnqXHUiCmKnS6r8k2QvTk+6b8Y0KGF9yHbh5oX4VFQZ8qO7X5zwzx1f+5R7coI5sU6lFg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="/signup/signup.css" />
+</head>
+<body>
+  <div class="container login-container">
+    <div class="controls">
+      <button id="toggleTheme" class="icon-btn" aria-label="Toggle Theme" aria-pressed="false">🌙</button>
+      <select id="langSwitcher" aria-label="Select Language">
+        <option value="en">EN</option>
+        <option value="ar">AR</option>
+      </select>
+    </div>
+
+    <div class="logo-container">
+      <img src="/PR-text.png" alt="OtakuHub Logo" class="logo" />
+    </div>
+
+    <h1 data-i18n="signupTitle">Create your account</h1>
+
+    <form id="signupForm" novalidate>
+      <label for="email" data-i18n="emailLabel">Email</label>
+      <div class="input-group">
+        <input type="email" id="email" name="email" required placeholder="you@example.com" autocomplete="email" aria-describedby="emailError" />
+        <i class="fa fa-envelope icon"></i>
+        <span id="emailError" class="error-message" aria-live="polite"></span>
+      </div>
+
+      <label for="password" data-i18n="passwordLabel">Password</label>
+      <div class="input-group">
+        <input type="password" id="password" name="password" required placeholder="••••••••" autocomplete="new-password" aria-describedby="passwordError" />
+        <i class="fa fa-lock icon"></i>
+        <span id="passwordError" class="error-message" aria-live="polite"></span>
+      </div>
+      <label for="confirmPassword" data-i18n="confirmPasswordLabel">Confirm Password</label>
+      <div class="input-group">
+        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="••••••••" autocomplete="new-password" aria-describedby="confirmPasswordError" />
+        <i class="fa fa-lock icon"></i>
+        <span id="confirmPasswordError" class="error-message" aria-live="polite"></span>
+      </div>
+      <button type="submit" class="btn btn-primary cta" aria-label="Sign Up" data-i18n="signup">
+        <i class="fa fa-user-plus"></i> Sign Up
+      </button>
+    </form>
+
+    <p class="signup-text">
+      <span data-i18n="haveAccount">Already have an account?</span>
+      <a href="../login/login.html" data-i18n="loginHere">Login here</a>
+    </p>
+  </div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+
+  <!-- Custom JS -->
+  <script src="/signup/lang.js"></script>
+  <script type="module" src="/signup/firebase-config.js"></script>
+  <script type="module" src="/signup/signup.js"></script>
+</body>
+</html>
